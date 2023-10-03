@@ -8,6 +8,7 @@ import Video from './pages/Video/Video.jsx';
 import AddVideo from './pages/AddVideo/AddVideo.jsx';
 import './index.css';
 import store from './app/store.js';
+import EditVideo from './pages/EditVideo/EditVideo.jsx';
 
 const routes = createBrowserRouter([
 	{
@@ -25,6 +26,10 @@ const routes = createBrowserRouter([
 			{
 				path: '/addVideo',
 				element: <AddVideo />,
+			},
+			{
+				path: '/editVideo/:id',
+				element: <EditVideo />,
 			},
 		],
 	},

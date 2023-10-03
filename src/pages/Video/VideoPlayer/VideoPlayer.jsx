@@ -1,45 +1,50 @@
 import editImg from '../../../assets/edit.svg';
 import deleteImg from '../../../assets/delete.svg';
+import { Link } from 'react-router-dom';
 
-export default function VideoPlayer() {
+export default function VideoPlayer({ video }) {
+	// ! Required variables
+	// eslint-disable-next-line react/prop-types
+	const { id, title, description, link, date } = video;
+
 	return (
 		<div className='col-span-full w-full space-y-8 lg:col-span-2'>
 			{/* <!-- video player --> */}
 			<iframe
 				width='100%'
 				className='aspect-video'
-				src='https://www.youtube-nocookie.com/embed/6O4s7v28nlw'
-				title='Some video title'
+				src={link}
+				title={title}
 				allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
-				allowfullscreen></iframe>
+				allowFullScreen></iframe>
 
 			{/* <!-- video description --> */}
 			<div className=''>
 				<div className='pb-4 flex items-center justify-between border-b'>
 					<div className='text-start'>
 						<h1 className='text-lg font-semibold tracking-tight text-slate-800'>
-							Some video title
+							{title}
 						</h1>
 						<h2 className='text-sm leading-[1.7142857] text-slate-600 w-full'>
-							Uploaded on 23 Nov 2022
+							Uploaded on {date}
 						</h2>
 					</div>
 
 					{/* <!-- delete/edit --> */}
 					<div className='flex gap-10 w-48'>
 						<div className='flex gap-1'>
-							<div className='shrink-0'>
+							<Link to={`/editVideo/${id}`} className='shrink-0'>
 								<img
 									className='w-5 block'
 									src={editImg}
 									alt='Edit'
 								/>
-							</div>
-							<a
-								href='add-video.html'
+							</Link>
+							<Link
+								to={`/editVideo/${id}`}
 								className='text-sm leading-[1.7142857] text-slate-600'>
 								Edit
-							</a>
+							</Link>
 						</div>
 						<div className='flex gap-1'>
 							<div className='shrink-0'>
@@ -57,7 +62,7 @@ export default function VideoPlayer() {
 				</div>
 
 				<div className='mt-4 text-sm text-[#334155] text-start dark:text-slate-400'>
-					Some video description here
+					{description}
 				</div>
 			</div>
 		</div>

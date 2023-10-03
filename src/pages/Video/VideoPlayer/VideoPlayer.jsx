@@ -1,10 +1,10 @@
+import authorImg from '../../../assets/author.png';
 import editImg from '../../../assets/edit.svg';
 import deleteImg from '../../../assets/delete.svg';
 import { Link } from 'react-router-dom';
 
 export default function VideoPlayer({ video }) {
 	// ! Required variables
-	// eslint-disable-next-line react/prop-types
 	const { id, title, description, link, date } = video;
 
 	return (
@@ -21,13 +21,16 @@ export default function VideoPlayer({ video }) {
 			{/* <!-- video description --> */}
 			<div className=''>
 				<div className='pb-4 flex items-center justify-between border-b'>
-					<div className='text-start'>
-						<h1 className='text-lg font-semibold tracking-tight text-slate-800'>
-							{title}
-						</h1>
-						<h2 className='text-sm leading-[1.7142857] text-slate-600 w-full'>
-							Uploaded on {date}
-						</h2>
+					<div className='flex items-center'>
+						<img src={authorImg} alt={title} className='w-14 h-14 mr-2' />
+						<div className='text-start'>
+							<h1 className='text-lg font-semibold tracking-tight text-slate-800'>
+								{title}
+							</h1>
+							<h2 className='text-sm leading-[1.7142857] text-slate-600 w-full'>
+								Uploaded on {date}
+							</h2>
+						</div>
 					</div>
 
 					{/* <!-- delete/edit --> */}

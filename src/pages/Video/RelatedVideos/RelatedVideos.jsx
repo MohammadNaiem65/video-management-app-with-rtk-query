@@ -1,37 +1,29 @@
-export default function RelatedVideos() {
-    return (
-		<div className='col-span-full lg:col-auto max-h-[570px] overflow-y-auto'>
-			{/* <!-- single related video --> */}
-			<div className='w-full flex flex-row gap-2 mb-4'>
-				<div className='relative w-[168px] h-[94px] flex-none duration-300 hover:scale-[1.03]'>
-					<a href='video.html'>
-						<img
-							src='https://i3.ytimg.com/vi/6O4s7v28nlw/maxresdefault.jpg'
-							className='object-cover'
-							alt='Some video title'
-						/>
-					</a>
-					<p className='absolute right-2 bottom-2 bg-gray-900 text-gray-100 text-xs px-1 py'>
-						12:10
-					</p>
-				</div>
+import { useGetRelatedVideosQuery } from '../../../features/api/apiSlice';
+import PlayerLoader from '../../../shared/loaders/PlayerLoader';
+import Video from '../Video/Video';
 
-				<div className='flex flex-col w-full'>
-					<a href='#'>
-						<p className='text-slate-900 text-sm font-semibold'>
-							Some video title
-						</p>
-					</a>
-					<a
-						className='text-gray-400 text-xs mt-2 hover:text-gray-600'
-						href='#'>
-						Learn with Sumit
-					</a>
-					<p className='text-gray-400 text-xs mt-1'>
-						100K views . 23 Oct 2022
-					</p>
-				</div>
-			</div>
+export default function RelatedVideos({ id, title }) {
+	// ! Required variables
+	const {
+		data: videos,
+		isLoading,
+		isError,
+		error,
+	} = useGetRelatedVideosQuery({ id, title });
+
+	// decide what to render
+	let content = null;
+	if (isLoading) {
+		content = <PlayerLoader />;
+	} else if (!isLoading && !isError && videos.length > 0) {
+		content = videos.map((video) => (
+			<Video key={video.id} details={video} />
+		));
+	}
+
+	return (
+		<div className='col-span-full lg:col-auto overflow-y-auto'>
+			{content}
 		</div>
 	);
 }

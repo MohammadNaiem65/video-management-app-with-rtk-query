@@ -23,7 +23,7 @@ export default function Video() {
 			<div className='grid grid-cols-3 gap-2 lg:gap-8'>
 				<VideoPlayer video={video} />
 
-				<RelatedVideos />
+				<RelatedVideos id={video.id} title={video.title} />
 			</div>
 		);
 	}

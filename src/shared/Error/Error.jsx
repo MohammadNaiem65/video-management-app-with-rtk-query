@@ -1,3 +1,3 @@
-export default function Error() {
-    return <div className='col-span-12'>some error happened</div>;
+export default function Error({ error }) {
+	return <div className='col-span-12'>{error}</div>;
 }

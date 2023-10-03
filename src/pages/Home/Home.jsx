@@ -23,9 +23,9 @@ export default function Home() {
 				<VideoLoader />
 			</>
 		);
-	} else if (!isLoading && videos.length === 0) {
+	} else if (!isLoading && !isError && videos.length === 0) {
 		content = <h3 className='text-xl font-semibold'>No data found.</h3>;
-	} else if (!isLoading && videos.length > 0) {
+	} else if (!isLoading && !isError && videos.length > 0) {
 		content = videos.map((video) => (
 			<Video key={video.id} details={video} />
 		));

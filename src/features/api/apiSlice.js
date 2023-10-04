@@ -11,6 +11,7 @@ export const apiSlice = createApi({
 		}),
 		getVideo: builder.query({
 			query: (id) => `/videos/${id}`,
+			keepUnusedDataFor: 300,
 		}),
 		getRelatedVideos: builder.query({
 			query: ({ id, title }) => {
@@ -23,9 +24,17 @@ export const apiSlice = createApi({
 
 				return queryString;
 			},
+			keepUnusedDataFor: 300,
+		}),
+		addVideo: builder.mutation({
+			query: (data) => ({
+				url: '/videos',
+				method: 'POST',
+				body: data,
+			}),
 		}),
 	}),
 });
 
-export const { useGetVideosQuery, useGetVideoQuery, useGetRelatedVideosQuery } =
+export const { useGetVideosQuery, useGetVideoQuery, useGetRelatedVideosQuery, useAddVideoMutation } =
 	apiSlice;
